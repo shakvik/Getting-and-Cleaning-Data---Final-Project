@@ -20,8 +20,8 @@ For each record it is provided:
 ##VARIABLES
 -------------------------------------------------------------------------
 ###RAW DATA
-activity_labels - Links the class labels with their activity name.
-features - Shows information about the variables used on the feature vector.
+activity_labels - Links the class labels with their activity name.  
+features - Shows information about the variables used on the feature vector.  
 
 ###RAW TEST DATA
 y_test - Test labels.
