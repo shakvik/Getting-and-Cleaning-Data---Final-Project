@@ -41,10 +41,10 @@ total_acc_z_train<-read.delim(file="./UCI HAR Dataset/train/Inertial Signals/tot
 
 
 #Create merged Activities and Subject table
-temp<-left_join(rbind(y_test,y_train),activity_labels,by=c("V1"="V1"))
-colnames(temp)<-c("ActivityNo","Activity")
-activity_merged<-cbind(temp,rbind(subject_test,subject_train))
-colnames(activity_merged)<-c(colnames(temp),"Subject")
+activity<-left_join(rbind(y_test,y_train),activity_labels,by=c("V1"="V1"))
+colnames(activity)<-c("ActivityNo","Activity")
+subject_merged<-cbind(activity,rbind(subject_test,subject_train))
+colnames(subject_merged)<-c(colnames(activity),"Subject")
 
 #Rename and merge X_test and X_train with appropriate column names
 colnames(X_test)<-features[,2]
@@ -64,7 +64,7 @@ angularvelocity_x<-rbind(body_gyro_x_test,body_gyro_x_train)
 angularvelocity_y<-rbind(body_gyro_y_test,body_gyro_y_train)
 angularvelocity_z<-rbind(body_gyro_z_test,body_gyro_z_train)
 
-step1<-cbind(activity_merged,X_merged)
+step1<-cbind(subject_merged,X_merged)
 
 #Step2  Extract mean and std
 meanindex<-grep("mean()",features[,2],fixed=TRUE)
@@ -72,7 +72,7 @@ stdevindex<-grep("std()",features[,2],fixed=TRUE)
 step2<-X_merged[,c(meanindex,stdevindex)]
 
 #Step3 Adding descriptive activity names
-step3<-cbind(activity_merged,step2)
+step3<-cbind(subject_merged,step2)
 
 #Step 4
 ## By the end of step 3 the variables have apporpriate names as it is
